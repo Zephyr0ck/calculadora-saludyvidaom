@@ -138,31 +138,51 @@ document.addEventListener("DOMContentLoaded", () => {
         const modalLabel = document.getElementById('modalLabel');
         const productoId = parseInt(modalLabel.dataset.productId); 
         const producto = productos.find(p => p.id === productoId);
-
+    
         if (!producto) {
             console.error("Producto no encontrado");
             return;
         }
-
+    
+        // Validaciones
+        const descuentosDropdown = document.getElementById('descuentos');
+        const descuentoSeleccionado = descuentosDropdown.value;
+    
         let tipoSeleccionado = '';
         if (producto.tipo === "Caja") {
             const tipoSeleccionadoElement = document.querySelector('input[name="tipoCaja"]:checked');
             tipoSeleccionado = tipoSeleccionadoElement ? tipoSeleccionadoElement.value : '';
         }
-
-        const descuentoSeleccionado = document.getElementById('descuentos').value;
-
+    
+        // Comprobar si se debe validar
+        if (["Botella", "Lata", "Frasco", "Doypack", "Botellin"].includes(producto.tipo)) {
+            if (!descuentoSeleccionado) {
+                alert("Por favor, selecciona un descuento.");
+                return; // Detener la ejecución si no se seleccionó un descuento
+            }
+        } else if (producto.tipo === "Caja") {
+            if (!tipoSeleccionado) {
+                alert("Por favor, selecciona un tipo: Por Sobre o Por Caja.");
+                return; // Detener la ejecución si no se seleccionó un tipo
+            }
+            if (!descuentoSeleccionado) {
+                alert("Por favor, selecciona un descuento.");
+                return; // Detener la ejecución si no se seleccionó un descuento
+            }
+        }
+    
         const productoSeleccionado = {
             nombre: producto.nombre,
             cantidad: parseInt(cantidad),
             tipo: tipoSeleccionado,
             precio: parseFloat(descuentoSeleccionado) * parseInt(cantidad)
         };
-
+    
         productosSeleccionados.push(productoSeleccionado);
         actualizarAlerta();
         $('#modalProducto').modal('hide');
     });
+    
 
     function actualizarAlerta() {
         const alerta = document.getElementById('alerta');
