@@ -2,21 +2,31 @@ document.addEventListener("DOMContentLoaded", () => {
     let productos = [];
     let productosSeleccionados = [];
 
+    // Mostrar el spinner antes de cargar los productos
+    document.getElementById('spinner').style.display = 'block';
+
     // Cargar los productos desde el archivo JSON
     fetch('productos.json')
         .then(response => response.json())
         .then(data => {
             productos = data;
             mostrarProductos(productos);
+         })
+        .catch(error => {
+            console.error("Error al cargar productos:", error);
+        })
+        .finally(() => {
+            // Ocultar el spinner una vez que la carga se complete
+            document.getElementById('spinner').style.display = 'none';
         });
-
+        
     function mostrarProductos(productos) {
         const contenedorProductos = document.getElementById('productos');
         contenedorProductos.innerHTML = '';
 
         productos.forEach(producto => {
             const card = document.createElement('div');
-            card.className = 'col-md-4';
+            card.className = 'col-12 col-sm-6 col-md-4 col-lg-3'; // Ajuste responsivo
             card.innerHTML = `
                 <div class="card border-warning">
                     <img class="rounded mx-auto d-block card-img-top" src="imagenes/${producto.imagen}" alt="${producto.nombre}">
@@ -44,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Aquí agregas la nueva función de filtro
+    // Función de filtro de productos
     function filtrarProductos() {
         const filtro = document.getElementById('buscador').value.toLowerCase();
         const productosFiltrados = productos.filter(producto => 
@@ -56,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Evento de buscador
     document.getElementById('buscador').addEventListener('input', filtrarProductos);
 
-    // Función abrirModal y otras funciones ya existentes...
+    // Función abrirModal
     window.abrirModal = function(id) {
         const producto = productos.find(p => p.id === id);
         if (!producto) {
@@ -113,6 +123,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('cantidad').addEventListener('input', actualizarTotal);
         
         $('#modalProducto').modal('show');
+
+        // Cerrar modal con Esc
+        document.addEventListener('keydown', (event) => {
+            if (event.key === "Escape") {
+                $('#modalProducto').modal('hide');
+            }
+        });
     }
 
     function limpiarDatosModal() {

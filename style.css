@@ -1,0 +1,185 @@
+/* Estilos Generales */
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+/* Estilos para las tarjetas de productos */
+.card {
+  margin: 15px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Efecto hover para tarjetas */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste de la imagen dentro de la tarjeta */
+.card-img-top {
+  width: 50%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Spinner de carga */
+.spinner-border {
+  display: block;
+  margin: 0 auto;
+  color: #007bff;
+}
+
+/* Modales */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Transición suave para la aparición de modales, alertas, y otros elementos */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-in.show {
+  opacity: 1;
+}
+
+/* Estilos para el buscador */
+#buscador {
+  margin-bottom: 20px;
+}
+
+/* Estilos del botón 'Nueva Lista' */
+#btnNuevaLista {
+  margin-top: 10px;
+}
+
+/* Estilos para el carrito en la esquina superior derecha */
+#carritoBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+/* Dropdown del carrito */
+#detallesCarrito {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 15px;
+  z-index: 1001;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+/* Estilos para alertas */
+.alert {
+  margin-top: 15px;
+}
+
+#alerta {
+  display: none;
+}
+
+#resultado {
+  display: none;
+}
+
+/* Badge de información */
+.badge-pill {
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+/* Estilos para el modal de producto */
+#cantidadTotal {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#opcionesCaja {
+  margin-top: 15px;
+}
+
+/* Estilos para hacer la tabla más atractiva */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+td {
+  background-color: #f2f2f2;
+}
+
+tr:hover td {
+  background-color: #ddd;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .card-img-top {
+      width: 70%;
+  }
+
+  #carritoBtn {
+      padding: 8px 12px;
+      font-size: 14px;
+  }
+}
+
+button:hover {
+  background-color: #004080; /* Cambia el color en el hover */
+  transition: background-color 0.3s ease-in-out; /* Transición suave */
+}
+
+#spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050; /* Asegúrate de que esté encima de otros elementos */
+  background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+  border-radius: 10px;
+  padding: 20px;
+
+}
